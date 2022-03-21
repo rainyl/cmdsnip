@@ -1,0 +1,6 @@
+build*/
+dist*/
+a.png
+.vscode/
+.mypy_cache/
+__pycache__
