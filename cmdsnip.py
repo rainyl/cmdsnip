@@ -1,16 +1,16 @@
 import sys
 import argparse
-from PySide6 import QtCore, QtGui
-from PySide6.QtCore import Qt
+# from PySide6 import QtCore, QtGui
+from PySide6.QtCore import Qt, QPoint, QRect
 from PySide6.QtWidgets import QMainWindow, QApplication
-from PySide6.QtGui import QMouseEvent, QKeyEvent, QPaintEvent
+from PySide6.QtGui import QMouseEvent, QKeyEvent, QPaintEvent, QCursor, QPainter, QPen, QColor
 from pynput.mouse import Controller
 
 from PIL import ImageGrab
 from screeninfo import get_monitors
 
-QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
-QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
 
 
 class SnipWidget(QMainWindow):
@@ -26,10 +26,10 @@ class SnipWidget(QMainWindow):
 
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setWindowFlags(Qt.FramelessWindowHint)
-        QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
+        QApplication.setOverrideCursor(QCursor(Qt.CrossCursor))
 
-        self.begin = QtCore.QPoint()
-        self.end = QtCore.QPoint()
+        self.begin = QPoint()
+        self.end = QPoint()
         self.mouse = Controller()
 
         self.snip()
@@ -68,13 +68,13 @@ class SnipWidget(QMainWindow):
             opacity = 0
 
         self.setWindowOpacity(opacity)
-        qp = QtGui.QPainter(self)
-        qp.setPen(QtGui.QPen(QtGui.QColor('black'), lw))
-        qp.setBrush(QtGui.QColor(*brushColor))
-        qp.drawRect(QtCore.QRect(self.begin, self.end))
+        qp = QPainter(self)
+        qp.setPen(QPen(QColor('black'), lw))
+        qp.setBrush(QColor(*brushColor))
+        qp.drawRect(QRect(self.begin, self.end))
 
     def keyPressEvent(self, event: QKeyEvent):
-        if event.key() == QtCore.Qt.Key_Escape:
+        if event.key() == Qt.Key_Escape:
             QApplication.restoreOverrideCursor()
             self.close()
         event.accept()
@@ -108,8 +108,8 @@ class SnipWidget(QMainWindow):
         QApplication.processEvents()
 
         self.close()
-        self.begin = QtCore.QPoint()
-        self.end = QtCore.QPoint()
+        self.begin = QPoint()
+        self.end = QPoint()
         img.save(self.imagePath)
 
 

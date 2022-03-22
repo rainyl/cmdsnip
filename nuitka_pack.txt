@@ -1,1 +1,1 @@
-nuitka --mingw64 --output-dir=build --follow-imports --show-progress --show-memory  --plugin-enable=pyside6 ./cmdsnip.py
+nuitka --mingw64 --onefile --output-dir=build --follow-imports --show-progress --show-memory  --plugin-enable=pyside6 ./cmdsnip.py
