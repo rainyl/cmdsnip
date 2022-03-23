@@ -1,3 +1,8 @@
+"""
+    Original code from https://github.com/lukas-blecher/LaTeX-OCR
+    Modified by Rainyl
+    License: MIT
+"""
 import sys
 import argparse
 # from PySide6 import QtCore, QtGui
